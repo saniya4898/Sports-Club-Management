@@ -25,4 +25,5 @@
 	
 	<bean id="adminDao" class="com.xoriant.dao.AdminDaoImpl"></bean>
 	<bean id="clerkDao" class="com.xoriant.dao.ClerkDaoImpl"></bean>
+	<bean id="hibernateConnect" class="com.xoriant.util.HibernateConnect"></bean>
 </beans>

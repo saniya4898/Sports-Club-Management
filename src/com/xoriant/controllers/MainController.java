@@ -41,7 +41,7 @@ public class MainController {
 				System.out.println("Invalid Credentials");
 				return new ModelAndView("index");
 			}
-			System.out.println("Admin login successfull");
+			System.out.println("Clerk login successfull");
 			return new ModelAndView("ClerkHome");
 		}
 	//	return null;

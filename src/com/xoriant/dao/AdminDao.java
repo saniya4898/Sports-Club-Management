@@ -1,5 +1,7 @@
 package com.xoriant.dao;
 
+import java.util.List;
+
 import com.xoriant.beans.Admin;
 import com.xoriant.beans.Clerk;
 import com.xoriant.beans.Game;
@@ -14,5 +16,9 @@ public interface AdminDao {
 	public int addMembershipPlan(Plan plan);
 	public void updateMembershipPlan(Plan plan);
 	public boolean deleteMembershipPlan(Integer planId);
+	public List<Clerk> getAllClerks();
+	public List<Game> getAllGames();
+	public List<Plan> getAllPlans();
+	public Plan getPlanById(int planId);
 	
 }

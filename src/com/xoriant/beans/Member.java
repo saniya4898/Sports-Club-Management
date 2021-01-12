@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
 @Table(name="member")
 public class Member {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@PrimaryKeyJoinColumn
 	@Column(name="member_id")
 	private Integer memberId;
@@ -29,7 +30,7 @@ public class Member {
 	private Date expiryOfMembership;
 	@OneToMany(cascade=CascadeType.ALL)
 	private List<Game> gamesSelected;
-	//TODO figure out mapping
+    @ManyToOne
 	private Plan planSelected;
  	
 	public Member() {
