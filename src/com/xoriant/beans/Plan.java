@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name="plan")
 public class Plan {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="plan_id")
 	private Integer planId;
 	@Column(name="no_of_days")

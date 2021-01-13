@@ -17,7 +17,7 @@ import com.xoriant.util.HibernateConnect;
 public class ClerkDaoImpl implements ClerkDao {
 	@Autowired
 	private HibernateConnect hibernateConnect;
-	
+
 	public HibernateConnect getHibernateConnect() {
 		return hibernateConnect;
 	}
@@ -28,26 +28,50 @@ public class ClerkDaoImpl implements ClerkDao {
 
 	@Override
 	public int createMember(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+		int mid=-1;
+		Session session=this.hibernateConnect.getSessionFactory().openSession();
+		Transaction transaction=session.beginTransaction();
+		mid=(int)session.save(member);
+		transaction.commit();
+		session.close();
+		return mid;
 	}
 
 	@Override
 	public void updateMember(Member member) {
-		// TODO Auto-generated method stub
+		Session session=this.hibernateConnect.getSessionFactory().openSession();
+		Transaction transaction=session.beginTransaction();
+		session.update(member);
+		transaction.commit();
+		session.close();
 		
+
 	}
 
 	@Override
 	public boolean deleteMember(Integer memberId) {
-		// TODO Auto-generated method stub
-		return false;
+		Session session=this.hibernateConnect.getSessionFactory().openSession();
+		Transaction transaction=session.beginTransaction();
+		String hql = "FROM Member A WHERE A.memberId = :memberId";
+		Query<Member> query = session.createQuery(hql);
+		query.setParameter("memberId", memberId);
+		List<Member> members = query.getResultList();		
+		if(members.size()<0)
+			return false;
+		session.delete(members.get(0));
+		transaction.commit();
+		session.close();
+		return true;
 	}
 
 	@Override
 	public void updateClerk(Clerk clerk) {
-		// TODO Auto-generated method stub
-		
+		Session session=this.hibernateConnect.getSessionFactory().openSession();
+		Transaction transaction=session.beginTransaction();
+		session.update(clerk);
+		transaction.commit();
+		session.close();
+
 	}
 
 	@Override
@@ -65,7 +89,7 @@ public class ClerkDaoImpl implements ClerkDao {
 	@Override
 	public void renewMembership(Integer memberId) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -74,7 +98,7 @@ public class ClerkDaoImpl implements ClerkDao {
 		Session session=this.hibernateConnect.getSessionFactory().openSession();
 		Transaction transaction=session.beginTransaction();
 		String hql = "FROM Clerk C WHERE C.clerkName = :username AND clerkPassword=:password";
-		
+
 		Query<Clerk> query = session.createQuery(hql);
 		query.setParameter("username", username);
 		query.setParameter("password", password);
@@ -86,5 +110,32 @@ public class ClerkDaoImpl implements ClerkDao {
 		}
 		return clerk;
 	}
+	@Override
+	public List<Game> getAllGames() {
+		return this.hibernateConnect.getSessionFactory().openSession().createQuery("FROM Game").getResultList();
+	}
+	@Override
+	public List<Plan> getAllPlans() {
+		return this.hibernateConnect.getSessionFactory().openSession().createQuery("FROM Plan").getResultList();
+	}
+
+	@Override
+	public List<Member> getAllMembers() {
+		return this.hibernateConnect.getSessionFactory().openSession().createQuery("FROM Member").getResultList();
+	}
+
+	@Override
+	public Member getMemberById(int memberId) {
+		Session session=this.hibernateConnect.getSessionFactory().openSession();
+		Transaction transaction=session.beginTransaction();
+		String hql = "FROM Member A WHERE A.memberId = :memberId";
+		Query<Member> query = session.createQuery(hql);
+		query.setParameter("memberId",memberId);
+		List<Member> members = query.getResultList();
+		System.out.println(members);
+		return members.get(0);
+	}
+
+
 
 }

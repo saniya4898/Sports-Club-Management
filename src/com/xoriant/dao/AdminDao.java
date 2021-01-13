@@ -21,4 +21,5 @@ public interface AdminDao {
 	public List<Plan> getAllPlans();
 	public Plan getPlanById(int planId);
 	
+	
 }

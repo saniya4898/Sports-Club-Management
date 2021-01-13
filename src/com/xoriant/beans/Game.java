@@ -1,21 +1,27 @@
 package com.xoriant.beans;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="game")
 public class Game {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="game_id")
 	private Integer gameId;
 	@Column(name="game_name")
 	private String gameName;
+//	@ManyToMany(mappedBy = "gamesSelected")
+//    private Set<Member> members = new HashSet<>();
 	
 	public Game() {
 		// TODO Auto-generated constructor stub
@@ -44,7 +50,7 @@ public class Game {
 
 	@Override
 	public String toString() {
-		return "Game [gameId=" + gameId + ", gameName=" + gameName + "]";
+		return gameName ;
 	}
 	
 }

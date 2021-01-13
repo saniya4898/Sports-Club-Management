@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -18,7 +21,7 @@ import javax.persistence.Table;
 @Table(name="member")
 public class Member {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@PrimaryKeyJoinColumn
 	@Column(name="member_id")
 	private Integer memberId;
@@ -28,11 +31,12 @@ public class Member {
 	private Date dateOfMembership;
 	@Column(name="expiry_of_memebership")
 	private Date expiryOfMembership;
-	@OneToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="member_game", joinColumns= {@JoinColumn(name="member_id")}, inverseJoinColumns= {@JoinColumn(name="game_id")})
+
 	private List<Game> gamesSelected;
     @ManyToOne
 	private Plan planSelected;
- 	
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
@@ -94,12 +98,20 @@ public class Member {
 	public void setPlanSelected(Plan planSelected) {
 		this.planSelected = planSelected;
 	}
+	
+	public String gamesToString() {
+		 String t="";
+		 for(Game game:this.gamesSelected) {
+			 t+=game.getGameName()+",";
+		 }
+		 return t.substring(0,t.length());
+	}
 
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", memberName=" + memberName + ", dateOfMembership=" + dateOfMembership
 				+ ", expiryOfMembership=" + expiryOfMembership + ", gamesSelected=" + gamesSelected + ", planSelected="
 				+ planSelected + "]";
-	}
+	}	
 	
 }

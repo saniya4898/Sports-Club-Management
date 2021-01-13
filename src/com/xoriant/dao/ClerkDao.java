@@ -17,5 +17,9 @@ public interface ClerkDao {
 	public List<Member> viewPlanWiseMembers(Plan plan);
 	public List<Member> viewGameWiseMembers(Game game);
 	public void renewMembership(Integer memberId);
+	public List<Game> getAllGames();
+	public List<Plan> getAllPlans();
+	public List<Member> getAllMembers();
+	public Member getMemberById(int memberId);
 	
 }

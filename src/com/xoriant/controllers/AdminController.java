@@ -22,6 +22,11 @@ import com.xoriant.util.HibernateConnect;
 public class AdminController {
 	@Autowired
 	private AdminDao adminDao;
+	@RequestMapping("/logoutAdmin")
+	public ModelAndView logoutAdmin() {
+		return new ModelAndView("index");
+		
+	}
 	@RequestMapping("/createClerkForm")
 	public ModelAndView getClerkForm() {
 		return new ModelAndView("createClerkForm");
