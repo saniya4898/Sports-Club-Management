@@ -1,14 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="./adminNavbar.jsp"></jsp:include>
-Admin home
-<ul>
-	<li><a href="/Sports_Club_Management/admin/createClerkForm">Create Clerk</a></li>
-	<li><a href="/Sports_Club_Management/admin/viewClerks">View Clerks</a></li>
-	<li><a href="/Sports_Club_Management/admin/createGameForm">Add Game</a></li>
-	<li><a href="/Sports_Club_Management/admin/viewGames">View Games</a></li>
-	<li><a href="/Sports_Club_Management/admin/createPlanForm">Add Membership Plan</a></li>
-	<li><a href="/Sports_Club_Management/admin/viewPlans">View Membership Plans</a></li>
-	<li><a href="/Sports_Club_Management/admin/logoutAdmin">Logout</a></li>
-</ul>
+<div class="container">
+	<div class="jumbotron">
+		<h1 class="display-4">Hello, ${userName }!</h1>
+		<p class="lead">Welcome to Sports Club Management.</p>
+		<hr class="my-4">
+		<p>Here you will be able to manage your club's Clerks, Games &
+			Membership Plans.</p>
+		<p>For any query write to us at : info@sportsclub.com</p>
+	</div>
+</div>
+
 <jsp:include page="./footer.jsp"></jsp:include>

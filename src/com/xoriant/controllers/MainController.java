@@ -23,10 +23,9 @@ public class MainController {
 		ModelAndView modelAndView = new ModelAndView("index");
 		return modelAndView;
 	}
-
 	@RequestMapping("/login")
 	public ModelAndView login(@RequestParam("userCategory") String userCategory,@RequestParam("userName") String userName,@RequestParam("password")String password) {
-		System.out.println(userName+" "+password+" "+userCategory);
+		ModelAndView modelAndView = null;
 		if(userCategory.equalsIgnoreCase("admin")) {
 			Admin admin=this.adminDao.login(userName, password);
 			if(admin==null) {
@@ -34,7 +33,9 @@ public class MainController {
 				return new ModelAndView("index");
 			}
 			System.out.println("Admin login successfull");
-			return new ModelAndView("adminHome");
+			modelAndView = new ModelAndView("adminHome");
+			modelAndView.addObject("userName",userName);
+			return modelAndView;
 		}else {
 			Clerk clerk=this.clerkDao.login(userName, password);
 			if(clerk==null) {
@@ -42,8 +43,10 @@ public class MainController {
 				return new ModelAndView("index");
 			}
 			System.out.println("Clerk login successfull");
-			return new ModelAndView("ClerkHome");
+			modelAndView = new ModelAndView("ClerkHome");
+			modelAndView.addObject("userName",userName);
+			return modelAndView;
 		}
-	//	return null;
+		//	return null;
 	}
 }
