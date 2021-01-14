@@ -7,7 +7,52 @@
 	}
 </script>
 
-	Hello EDIT Plan form
+	<style>
+.h1 {
+	margin-top: 50px;
+	text-align: center;
+}
+
+.container {
+	background-color: rgb(243, 250, 240);
+	border-radius: 1rem;
+	width: 500px;
+	padding: 20px;
+	font-size: 16px;
+	margin-top: 50px;
+	text-align: left; ! important;
+	border-color: rgba(82, 168, 236, 0.8);
+	box-shadow: 0px 15px 20px rgba(82, 168, 236, 0.6);
+}
+
+.row {
+	padding-left: 40px;
+}
+
+form {
+	padding: 20px;
+}
+
+.col {
+	width: 150px;
+}
+
+#userCategory {
+	width: 190px
+}
+
+#buttonContainer {
+	text-align: center;
+}
+
+input[type=text]:hover, input[type=password]:hover, input[type=number]:hover,
+	select:hover {
+	border-color: rgba(82, 168, 236, 0.8);
+	box-shadow: 0px 0px 8px rgba(82, 168, 236, 0.6);
+}
+</style>
+<div class="h1">Update Membership Plan</div>
+<div class="container">
 	<form action="/Sports_Club_Management/admin/editPlan" method="post"
 		onsubmit="return validateForm()">
 		<div class="form-group" style="display:none;">
@@ -32,6 +77,9 @@
 				value="${plan.planPrice }">
 		</div>
 
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<div id="buttonContainer">
+			<button type="submit" class="btn btn-primary">UPDATE</button>
+		</div>
 	</form>
+	</div>
 <jsp:include page="./footer.jsp"></jsp:include>

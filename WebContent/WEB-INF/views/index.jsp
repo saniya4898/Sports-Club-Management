@@ -1,24 +1,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<jsp:include page="./adminNavbar.jsp"></jsp:include>
+<jsp:include page="./loginNavbar.jsp"></jsp:include>
 <style>
+.h1{
+	margin-top:50px;
+	text-align: center;
+}
 .container {
-	text-align: center;
+	background-color: rgb(243, 250, 240);
+	border-radius: 1rem;
+	width: 500px;
+	padding: 20px;
 	font-size: 16px;
+	margin-top: 50px;
+	text-align: left; ! important;
+	border-color: rgba(82, 168, 236, 0.8);
+	box-shadow: 0px 15px 20px rgba(82, 168, 236, 0.6);
 }
-.form{
-	text-align: center;
+.row{
+	padding-left: 40px;
 }
-.row {
-	margin-left:400px;
-	text-align: left;!important
-	
+form{
+	padding: 20px;
+		
 }
 .col {
 	width: 150px;
 }
 #userCategory{
-	width:25%
+	width:190px
+}
+#buttonContainer {
+	text-align: center;
+}
+
+input[type=text]:hover, input[type=password]:hover,select:hover {
+	border-color: rgba(82, 168, 236, 0.8);
+	box-shadow: 0px 0px 8px rgba(82, 168, 236, 0.6);
 }
 </style>
 
@@ -27,9 +45,9 @@
 		return true;
 	}
 </script>
-
+<div class="h1">LOGIN</div>
 <div class="container">
-	<h1>LOGIN</h1>
+	
 	<form action="/Sports_Club_Management/login" method="post"
 		onsubmit="return validateForm()">
 		<div class="form-group form-inline row ">
@@ -49,7 +67,9 @@
 				type="password" class="form-control col" id="password"
 				name="password" placeholder="Password">
 		</div>
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<div id="buttonContainer">
+				<button type="submit" class="btn btn-primary">LOGIN</button>
+		</div>
 	</form>
 
 </div>

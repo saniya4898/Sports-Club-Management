@@ -8,15 +8,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xoriant.beans.Admin;
 import com.xoriant.beans.Clerk;
-import com.xoriant.dao.AdminDaoImpl;
-import com.xoriant.dao.ClerkDaoImpl;
+import com.xoriant.dao.AdminDao;
+import com.xoriant.dao.ClerkDao;
 
 @Controller
 public class MainController {
 	@Autowired
-	AdminDaoImpl adminDao;
+	private AdminDao adminDao;
 	@Autowired
-	ClerkDaoImpl clerkDao;
+	private ClerkDao clerkDao;
 
 	@RequestMapping("/")
 	public ModelAndView displayHome() {

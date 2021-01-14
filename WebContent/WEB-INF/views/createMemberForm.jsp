@@ -1,34 +1,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="./clerkNavbar.jsp"></jsp:include>
 <script>
-	function onPlanChange(){
-		 var plan=document.getElementById("plans");
-		 var planValue=plan.value;
-		 var dateOfMembership=document.getElementById("dateOfMembership");
-		 console.log(dateOfMembership.value);
-		 var noOfDays=parseInt(planValue.split("-")[1]);
-		 document.getElementById("planPrice").value=parseInt(planValue.split("-")[2]);;
-		 var endOfMembership=document.getElementById("endOfMembership");
-		 console.log(endOfMembership.value);
-		 var date1=new Date(dateOfMembership.value);
-		 date1.setDate(date1.getDate()+noOfDays);
-		 console.log(formatDate(date1));
-		 endOfMembership.value=formatDate(date1);
-		
+	function onPlanChange() {
+		var plan = document.getElementById("plans");
+		var planValue = plan.value;
+		var dateOfMembership = document.getElementById("dateOfMembership");
+		console.log(dateOfMembership.value);
+		var noOfDays = parseInt(planValue.split("-")[1]);
+		document.getElementById("planPrice").value = parseInt(planValue
+				.split("-")[2]);
+		;
+		var endOfMembership = document.getElementById("endOfMembership");
+		console.log(endOfMembership.value);
+		var date1 = new Date(dateOfMembership.value);
+		date1.setDate(date1.getDate() + noOfDays);
+		console.log(formatDate(date1));
+		endOfMembership.value = formatDate(date1);
+
 	}
 	function formatDate(date) {
-	    var d = new Date(date),
-	        month = '' + (d.getMonth() + 1),
-	        day = '' + d.getDate(),
-	        year = d.getFullYear();
+		var d = new Date(date), month = '' + (d.getMonth() + 1), day = ''
+				+ d.getDate(), year = d.getFullYear();
 
-	    if (month.length < 2) 
-	        month = '0' + month;
-	    if (day.length < 2) 
-	        day = '0' + day;
+		if (month.length < 2)
+			month = '0' + month;
+		if (day.length < 2)
+			day = '0' + day;
 
-	    return [year, month, day].join('-');
+		return [ year, month, day ].join('-');
 	}
 	function validateForm() {
 		/*console.log("working");
@@ -68,7 +68,50 @@
 	}
 </script>
 
-	Hello Member form
+<style>
+.h1 {
+	margin-top: 50px;
+	text-align: center;
+}
+.gameLabel{
+	font-weight: normal !important;
+}
+.container {
+	background-color: rgb(243, 250, 240);
+	border-radius: 1rem;
+	padding: 20px;
+	width:800px;
+	font-size: 16px;
+	margin-top: 50px;
+	text-align: left; ! important;
+	border-color: rgba(82, 168, 236, 0.8);
+	box-shadow: 0px 15px 20px rgba(82, 168, 236, 0.6);
+}
+
+form {
+	padding: 20px;
+}
+
+.col {
+	width: 150px;
+}
+
+#userCategory {
+	width: 190px
+}
+
+#buttonContainer {
+	text-align: center;
+}
+
+input[type=text]:hover, input[type=password]:hover, input[type=number]:hover,
+	select:hover {
+	border-color: rgba(82, 168, 236, 0.8);
+	box-shadow: 0px 0px 8px rgba(82, 168, 236, 0.6);
+}
+</style>
+<div class="h1">Add Member</div>
+<div class="container">
 	<form action="/Sports_Club_Management/clerk/createMember" method="post"
 		onsubmit="return validateForm()">
 		<div class="form-group">
@@ -76,38 +119,43 @@
 				class="form-control" id="memberName" name="memberName"
 				placeholder="Enter Member Name">
 		</div>
-		<div class="form-group">
-			<label for="dateOfMembership">Date Of Membership</label> <input
-				type="date" class="form-control" id="dateOfMembership"
-				name="dateOfMembership">
+		<div class="row">
+			<div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+				<label for="dateOfMembership">Date Of Membership</label> <input
+					type="date" class="form-control" id="dateOfMembership"
+					name="dateOfMembership">
+			</div>
+			<div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+				<label for="expiryOfMembership">Expiry Of Membership</label> <input
+					type="date" class="form-control" id="endOfMembership"
+					name="endOfMembership" readonly>
+			</div>
 		</div>
 		<div class="form-group">
-			<label for="expiryOfMembership">Date Of Membership</label> <input
-				type="date" class="form-control" id="endOfMembership"
-				name="endOfMembership" readonly>
-		</div>
-		<div class="form-group">
-			<label for="games">Game</label>
+			<label for="games">Games</label><br />
 			<c:forEach var="game" items="${games}">
 				<input type="checkbox" id="${game.gameId }" name="games"
 					value="${game.gameId }">
-				<label for="${game.gameName }">${game.gameName }</label>
+				<label for="${game.gameName }" class="gameLabel">${game.gameName }</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</c:forEach>
 		</div>
 		<div class="form-group">
 			<label for="plans">Membership Plans</label> <select
-				class="form-group" onchange="onPlanChange()" id="plans" name="plans">
+				class="form-group form-control" onchange="onPlanChange()" id="plans" name="plans">
 				<option value="-1" selected>Select Plan</option>
 				<c:forEach var="plan" items="${plans}">
 					<option value="${plan.planId }-${plan.noOfDays }-${plan.planPrice}">${plan.planName }</option>
 				</c:forEach>
 			</select>
 		</div>
-		<div class="form-group" >
+		<div class="form-group">
 			<label for="planPrice">Plan Price</label> <input type="number"
-				class="form-control" id="planPrice" name="planPrice">
+				class="form-control" id="planPrice" name="planPrice" readonly>
 		</div>
 
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<div id="buttonContainer">
+			<button type="submit" class="btn btn-primary">ADD</button>
+		</div>
 	</form>
+</div>
 <jsp:include page="./footer.jsp"></jsp:include>
