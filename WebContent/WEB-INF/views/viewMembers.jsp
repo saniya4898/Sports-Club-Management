@@ -7,9 +7,57 @@
 caption {
 	text-align: center;
 }
+.hide{
+	display:none;
+}
 </style>
 
+<script>
+	function onCategoryChange(){
+		var plans=document.getElementById("plansType");
+		var games=document.getElementById("games");
+
+		var category=document.getElementById("searchCategory");
+		if(category.value=="membershipPlan"){
+			plans.style.display="inline";
+		}
+		else if(category.value=="games"){
+			plans.style.display="none";
+			games.style.display="inline";
+		}
+		
+	}
+
+</script>
+
 <div class="container">
+	<div class="container searchBar">
+		<div class="form-group form-inline">
+			<select class="form-control" name="searchCategory"
+				id="searchCategory"  onchange="onCategoryChange()">
+				<option value="-1">Select Category</option>
+				<option value="membershipPlan">Membership Plan</option>
+				<option value="game">Game</option>
+				<option value="expiryDateOfMembership">Expiry Date of Membership</option>
+			</select> 
+			
+			<select style="display:none;" class="form-control" id="plansType" name="plansType">
+				<option value="-1">Select Category</option>
+				<c:forEach var="plan" items="${plans}">
+					<option value="${plan.planId }">${plan.planName }</option>
+				</c:forEach>
+			</select> 
+			
+			<select class="form-control" id="gameType" name="gameType">
+				<option value="-1">Select Category</option>
+				<c:forEach var="game" items="${games}">
+					<option value="${game.gameId }">${game.gameName }</option>
+				</c:forEach>
+				
+			</select> <input type="date" class="form-control" id="expiryDate"
+				name="expiryDate">
+		</div>
+	</div>
 	<table class="table table-striped table-hover ">
 		<caption>
 			<h2>Members Details</h2>

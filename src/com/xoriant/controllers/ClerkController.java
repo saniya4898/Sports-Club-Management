@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xoriant.dao.ClerkDao;
+import com.xoriant.util.SessionUtility;
 import com.xoriant.beans.*;
 
 @Controller
@@ -25,6 +28,12 @@ public class ClerkController {
 	
 	@RequestMapping("/logoutClerk")
 	public ModelAndView logoutClerk() {
+		Clerk clerk;
+		HttpSession session=SessionUtility.openSession();
+		clerk=(Clerk)session.getAttribute("clerk");
+		if(clerk!=null)
+			session.removeAttribute("clerk");
+
 		return new ModelAndView("index");
 		
 	}
@@ -89,6 +98,8 @@ public class ClerkController {
 		if(members.size()>0) {
 			modelAndView=new ModelAndView("viewMembers");
 			modelAndView.addObject("members",members);
+			modelAndView.addObject("plans", this.clerkDao.getAllPlans());
+			modelAndView.addObject("games", this.clerkDao.getAllGames());
 		}else {
 			System.out.println("No member is available to display");
 			modelAndView=new ModelAndView("clerkHome");

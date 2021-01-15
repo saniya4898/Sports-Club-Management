@@ -31,7 +31,7 @@ public class Member {
 	private Date dateOfMembership;
 	@Column(name="expiry_of_memebership")
 	private Date expiryOfMembership;
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.PERSIST)
 	@JoinTable(name="member_game", joinColumns= {@JoinColumn(name="member_id")}, inverseJoinColumns= {@JoinColumn(name="game_id")})
 
 	private List<Game> gamesSelected;
