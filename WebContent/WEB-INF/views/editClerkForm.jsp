@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<jsp:include page="./adminNavbar.jsp"></jsp:include>
+<jsp:include page="./clerkNavbar.jsp"></jsp:include>
 <script>
 	function validateForm() {
 		return true;
@@ -47,23 +47,28 @@ input[type=text]:hover, input[type=password]:hover {
 </style>
 </head>
 <body>
-	<h1>Create Clerk Form</h1>
+	<h1>Update Clerk Form</h1>
 	<div class="container">
 
-		<form action="/Sports_Club_Management/admin/createClerk" method="post"
+		<form action="/Sports_Club_Management/clerk/editClerk" method="post"
 			onsubmit="return validateForm()">
+			<div class="form-group" style="display: none;">
+				<label for="celrkId">Clerk Id</label> <input type="number"
+					class="form-control" id="clerkId" name="clerkId"
+					value="${clerk.clerkId }">
+			</div>
 			<div class="form-group">
 				<label for="userName">User Name</label> <input type="text"
-					class="form-control" id="userName" name="userName"
-					placeholder="Enter User Name">
+					class="form-control" id="clerkName" name="clerkName"
+					placeholder="Enter Clerk Name" value="${clerk.clerkName }" readonly>
 			</div>
 			<div class="form-group">
 				<label for="password">Password</label> <input type="password"
-					class="form-control" id="password" name="password"
-					placeholder="Password">
+					class="form-control" id="clerkPassword" name="clerkPassword"
+					placeholder="Password" value="${clerk.clerkPassword }">
 			</div>
 			<div id="buttonContainer">
-				<button type="submit" class="btn btn-primary">SUBMIT</button>
+				<button type="submit" class="btn btn-primary">UPDATE</button>
 			</div>
 		</form>
 		<div class="msg">

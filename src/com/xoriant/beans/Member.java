@@ -104,7 +104,7 @@ public class Member {
 		 for(Game game:this.gamesSelected) {
 			 t+=game.getGameName()+",";
 		 }
-		 return t.substring(0,t.length());
+		 return t.substring(0,t.length()-1);
 	}
 
 	@Override

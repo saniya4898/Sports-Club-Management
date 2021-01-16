@@ -2,9 +2,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="./adminNavbar.jsp"></jsp:include>
 <script>
-function validateForm(){
-	return true;
-}
+	function validateForm() {
+		return true;
+	}
 </script>
 <style>
 .h1 {
@@ -49,6 +49,11 @@ input[type=text]:hover, input[type=password]:hover, input[type=number]:hover,
 	border-color: rgba(82, 168, 236, 0.8);
 	box-shadow: 0px 0px 8px rgba(82, 168, 236, 0.6);
 }
+
+.msg {
+	text-align: center;
+	font-weight: bold;
+}
 </style>
 <div class="h1">Add Membership Plan</div>
 <div class="container">
@@ -73,5 +78,8 @@ input[type=text]:hover, input[type=password]:hover, input[type=number]:hover,
 			<button type="submit" class="btn btn-primary">ADD</button>
 		</div>
 	</form>
+	<div class="msg">
+		<h4>${msg }</h4>
+	</div>
 </div>
 <jsp:include page="./footer.jsp"></jsp:include>

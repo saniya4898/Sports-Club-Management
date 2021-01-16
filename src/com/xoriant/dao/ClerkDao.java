@@ -21,5 +21,8 @@ public interface ClerkDao {
 	public List<Plan> getAllPlans();
 	public List<Member> getAllMembers();
 	public Member getMemberById(int memberId);
+	public Clerk getClerkById(int clerkId);
+	public Plan getPlanById(int planId);
+	public Game getGameById(int gameId);
 	
 }

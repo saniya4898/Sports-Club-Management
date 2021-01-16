@@ -1,6 +1,8 @@
 package com.xoriant.dao;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -39,6 +41,7 @@ public class ClerkDaoImpl implements ClerkDao {
 
 	@Override
 	public void updateMember(Member member) {
+		int mid=-1;
 		Session session=this.hibernateConnect.getSessionFactory().openSession();
 		Transaction transaction=session.beginTransaction();
 		session.update(member);
@@ -76,14 +79,26 @@ public class ClerkDaoImpl implements ClerkDao {
 
 	@Override
 	public List<Member> viewPlanWiseMembers(Plan plan) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAllMembers().stream().filter(member->member.getPlanSelected().getPlanId()==plan.getPlanId()).collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Member> viewGameWiseMembers(Game game) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Member> members=new LinkedList<Member>();
+		for(Member mem:this.getAllMembers()) {
+			boolean f=false;
+			List<Game> games=mem.getGamesSelected();
+			for(int i=0;i<games.size();i++) {
+				if(game.getGameId()==games.get(i).getGameId()) {
+					f=true;
+					break;
+				}
+					
+			}
+			if(f)
+				members.add(mem);
+		}
+		return members;
 	}
 
 	@Override
@@ -136,6 +151,27 @@ public class ClerkDaoImpl implements ClerkDao {
 		return members.get(0);
 	}
 
+	@Override
+	public Clerk getClerkById(int clerkId) {
+		Session session=this.hibernateConnect.getSessionFactory().openSession();
+		Transaction transaction=session.beginTransaction();
+		String hql = "FROM Clerk A WHERE A.clerkId = :clerkId";
+		Query<Clerk> query = session.createQuery(hql);
+		query.setParameter("clerkId",clerkId);
+		List<Clerk> clerks = query.getResultList();
+		System.out.println(clerks);
+		return clerks.get(0);
 
+	}
+
+	@Override
+	public Plan getPlanById(int planId) {
+		return this.getAllPlans().stream().filter(plan->plan.getPlanId()==planId).collect(Collectors.toList()).get(0);
+	}
+
+	@Override
+	public Game getGameById(int gameId) {
+		return this.getAllGames().stream().filter(game->game.getGameId()==gameId).collect(Collectors.toList()).get(0);
+	}
 
 }

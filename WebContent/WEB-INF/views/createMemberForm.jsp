@@ -70,19 +70,21 @@
 
 <style>
 .h1 {
-	margin-top: 50px;
+	margin-top: 30px;
 	text-align: center;
 }
-.gameLabel{
+
+.gameLabel {
 	font-weight: normal !important;
 }
+
 .container {
 	background-color: rgb(243, 250, 240);
 	border-radius: 1rem;
 	padding: 20px;
-	width:800px;
+	width: 900px;
 	font-size: 16px;
-	margin-top: 50px;
+	margin-top: 30px;
 	text-align: left; ! important;
 	border-color: rgba(82, 168, 236, 0.8);
 	box-shadow: 0px 15px 20px rgba(82, 168, 236, 0.6);
@@ -108,6 +110,11 @@ input[type=text]:hover, input[type=password]:hover, input[type=number]:hover,
 	select:hover {
 	border-color: rgba(82, 168, 236, 0.8);
 	box-shadow: 0px 0px 8px rgba(82, 168, 236, 0.6);
+}
+
+.msg {
+	text-align: center;
+	font-weight: bold;
 }
 </style>
 <div class="h1">Add Member</div>
@@ -141,7 +148,8 @@ input[type=text]:hover, input[type=password]:hover, input[type=number]:hover,
 		</div>
 		<div class="form-group">
 			<label for="plans">Membership Plans</label> <select
-				class="form-group form-control" onchange="onPlanChange()" id="plans" name="plans">
+				class="form-group form-control" onchange="onPlanChange()" id="plans"
+				name="plans">
 				<option value="-1" selected>Select Plan</option>
 				<c:forEach var="plan" items="${plans}">
 					<option value="${plan.planId }-${plan.noOfDays }-${plan.planPrice}">${plan.planName }</option>
@@ -157,5 +165,9 @@ input[type=text]:hover, input[type=password]:hover, input[type=number]:hover,
 			<button type="submit" class="btn btn-primary">ADD</button>
 		</div>
 	</form>
+	<div class="msg">
+		<h4>${msg }</h4>
+	</div>
 </div>
+
 <jsp:include page="./footer.jsp"></jsp:include>

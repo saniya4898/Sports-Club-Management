@@ -48,6 +48,11 @@ input[type=text]:hover, input[type=password]:hover, select:hover {
 	border-color: rgba(82, 168, 236, 0.8);
 	box-shadow: 0px 0px 8px rgba(82, 168, 236, 0.6);
 }
+
+.msg {
+	text-align: center;
+	font-weight: bold;
+}
 </style>
 <div class="h1">Add Game</div>
 <div class="container">
@@ -64,5 +69,8 @@ input[type=text]:hover, input[type=password]:hover, select:hover {
 			<button type="submit" class="btn btn-primary">ADD</button>
 		</div>
 	</form>
+	<div class="msg">
+		<h4>${msg }</h4>
+	</div>
 </div>
 <jsp:include page="./footer.jsp"></jsp:include>

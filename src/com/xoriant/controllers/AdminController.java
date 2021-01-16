@@ -42,7 +42,16 @@ public class AdminController {
 	}
 	@RequestMapping("/createClerkForm")
 	public ModelAndView getClerkForm() {
-		return new ModelAndView("createClerkForm");
+		ModelAndView modelAndView = null;
+		boolean res1=SessionUtility.isAdminLoggedIn();
+		if (res1) {
+			modelAndView = new ModelAndView("createClerkForm");
+			modelAndView.addObject("msg","");
+		}
+		else {
+			modelAndView = new ModelAndView("index");
+		}
+		return modelAndView;
 
 	}
 	@RequestMapping("/createClerk")
@@ -55,13 +64,16 @@ public class AdminController {
 			int cid=-1;
 			cid=this.adminDao.createClerkAccount(clerk);
 			if(cid>0) {
-				System.out.println("Clerk Created");
-				modelAndView=new ModelAndView("viewClerks");
-				modelAndView.addObject("clerks",adminDao.getAllClerks());
+				//				System.out.println("Clerk Created");
+				//				modelAndView=new ModelAndView("viewClerks");
+				//				modelAndView.addObject("clerks",adminDao.getAllClerks());
+				modelAndView = new ModelAndView("createClerkForm");
+				modelAndView.addObject("msg","Clerk Created Successfully");
 
 			}else {
 				System.out.println("Clerk not created");
-				modelAndView=new ModelAndView("createClerkForm");
+				modelAndView = new ModelAndView("createClerkForm");
+				modelAndView.addObject("msg","Clerk NOT Created ");
 			}
 
 		}else {
@@ -114,11 +126,15 @@ public class AdminController {
 	@RequestMapping("/createGameForm")
 	public ModelAndView getGameForm() {
 		boolean res1=SessionUtility.isAdminLoggedIn();
-
-		if (res1)
-			return new ModelAndView("createGameForm");
-		else
-			return new ModelAndView("index");
+		ModelAndView modelAndView =null;
+		if (res1) {
+			modelAndView = new ModelAndView("createGameForm");
+			modelAndView.addObject("msg","");
+		}
+		else {
+			modelAndView = new ModelAndView("index");
+		}
+		return modelAndView;
 	}
 	@RequestMapping("/createGame")
 	public ModelAndView createGame(@RequestParam("gameName") String gameName) {
@@ -129,12 +145,12 @@ public class AdminController {
 			int gid=-1;
 			gid=this.adminDao.addGame(game);
 			if(gid>0) {
-				System.out.println("Game Added");
-				modelAndView=new ModelAndView("adminHome");
+				modelAndView = new ModelAndView("createGameForm");
+				modelAndView.addObject("msg","Game Added Successfully");
 
 			}else {
-				System.out.println("Game not Added");
-				modelAndView=new ModelAndView("createGameForm");
+				modelAndView = new ModelAndView("createGameForm");
+				modelAndView.addObject("msg","Game NOT Added");
 			}
 
 		}else {
@@ -186,11 +202,16 @@ public class AdminController {
 	@RequestMapping("/createPlanForm")
 	public ModelAndView getPlanForm() {
 		boolean res1=SessionUtility.isAdminLoggedIn();
+		ModelAndView modelAndView = null;
+		if (res1) {
+			modelAndView = new ModelAndView("createPlanForm");
+			modelAndView.addObject("msg","");
+		}
+		else {
+			modelAndView = new ModelAndView("index");
+		}
+		return modelAndView;
 
-		if (res1)
-			return new ModelAndView("createPlanForm");
-		else
-			return new ModelAndView("index");
 
 	}
 	@RequestMapping("/createPlan")
@@ -202,12 +223,12 @@ public class AdminController {
 			int pid=-1;
 			pid=this.adminDao.addMembershipPlan(plan);
 			if(pid>0) {
-				System.out.println("Plan Added");
-				modelAndView=new ModelAndView("adminHome");
+				modelAndView = new ModelAndView("createPlanForm");
+				modelAndView.addObject("msg","Plan Added Successfully");
 
 			}else {
-				System.out.println("Plan not Added");
-				modelAndView=new ModelAndView("createPlanForm");
+				modelAndView = new ModelAndView("createPlanForm");
+				modelAndView.addObject("msg","Plan NOT Added");
 			}
 
 		}else {
@@ -243,7 +264,7 @@ public class AdminController {
 			System.out.println(plan);
 			modelAndView=new ModelAndView("editPlanForm");
 			modelAndView.addObject("plan", plan);
-			
+
 		}else {
 			modelAndView=new ModelAndView("index");
 		}
@@ -251,7 +272,7 @@ public class AdminController {
 	}
 	@RequestMapping("/editPlan")
 	public ModelAndView editPlan(@RequestParam("planId") int planId,@RequestParam("planName") String planName,@RequestParam("noOfDays") int noOfDays,@RequestParam("planPrice") double planPrice) {
-		
+
 		ModelAndView modelAndView=null;
 		boolean res1=SessionUtility.isAdminLoggedIn();
 		if(res1) {
@@ -267,7 +288,7 @@ public class AdminController {
 				System.out.println("No plan is available to display");
 				modelAndView=new ModelAndView("adminHome");
 			}
-			
+
 		}else {
 			modelAndView=new ModelAndView("index");
 		}

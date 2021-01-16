@@ -71,7 +71,7 @@
 
 <style>
 .h1 {
-	margin-top: 50px;
+	margin-top: 30px;
 	text-align: center;
 }
 
@@ -83,9 +83,9 @@
 	background-color: rgb(243, 250, 240);
 	border-radius: 1rem;
 	padding: 20px;
-	width: 800px;
+	width: 900px;
 	font-size: 16px;
-	margin-top: 50px;
+	margin-top: 30px;
 	text-align: left; ! important;
 	border-color: rgba(82, 168, 236, 0.8);
 	box-shadow: 0px 15px 20px rgba(82, 168, 236, 0.6);
